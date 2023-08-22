@@ -1,0 +1,1 @@
+msiexec /i %1\Apps\7z_x64.msi /qb!

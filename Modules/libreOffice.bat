@@ -1,0 +1,1 @@
+msiexec /i %1\Apps\LibreOffice_x86-64.msi /qb!

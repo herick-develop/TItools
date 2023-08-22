@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta charset="utf-8"/>
+    <title>TITools</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            font-family: cursive;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .grid {
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+            padding: 0 16px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 3px;
+            padding: 20px;
+            margin: auto;
+            max-width: 200px;
+            width: 100%;
+            float:left;
+            behavior: url(PIE.htc);
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+
+        .clearfix:after {
+            clear: both; 
+        }  
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            background-color: #f2f2f2; color: #212121;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: "pointer";
+            behavior: url(PIE.htc);
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .alert {
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-radius: 5px;
+            behavior: url(PIE.htc);
+        }
+    </style>
+
+<HTA:APPLICATION
+    ICON="./Config/ti-tools-icon.ico"
+    SCROLL="no"
+    applicationname="TI Tools"
+    border="thin"
+    borderstyle="normal"
+    caption="yes"
+    showintaskbar="yes"
+    sysmenu="yes"
+    ID="Titools"
+    VERSION="1.0"
+/>
+</head>
+
+<script language="VBScript">
+
+Sub Window_OnLoad
+  window.resizeto 560,880
+End Sub
+
+const DIR_TITools = "\\000.000.000.000\"
+const DIR_Agente = "\\00.00.00.00\"
+
+Set oShell = CreateObject ("WScript.Shell")
+
+Sub Start_Button()    
+
+    If anyDesk.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\anyDesk.bat" & " " & DIR_TITools,0,true
+    End If
+
+    If googleChrome.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\googleChrome.bat" & " " & DIR_TITools,0,true
+    End If
+
+    If firefox.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\firefox.bat" & " " & DIR_TITools,0,true
+    End If
+
+    If libreOffice.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\libreOffice.bat" & " " & DIR_TITools,0,true
+    End If
+
+    If microsoftOffice.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\microsoftOffice.bat" & " " & DIR_TITools,0,true
+    End If
+
+    If sevenZip.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\7zip.bat" & " " & DIR_TITools,0,true 
+    End If
+
+    If big.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Apps\InstaladorTerminal.exe" & " " & DIR_TITools,0,true
+    End If
+
+    If sigPaf.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\sigPaf.bat" & " " & DIR_TITools
+    End If
+    If sigMed.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\sigMed.bat" & " " & DIR_TITools
+    End If
+    If sigPaf_RH.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\sigPaf_RH.bat" & " " & DIR_TITools
+    End If
+    If msi_NFS.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\ms1_nfs.bat" & " " & DIR_TITools
+    End If
+    If concent.Checked Then
+        oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\concent.bat" & " " & DIR_TITools
+    End If
+
+    if (anyDesk.Checked = False) And (googleChrome.Checked = False) And (firefox.Checked = False) And (libreOffice.Checked = False) And (microsoftOffice.Checked = false) And (sevenZip.Checked = False) And (sigPaf.Checked = False) And (sigMed.Checked = False) And (sigPaf_RH.Checked = False) And (big.Checked = False) And (msi_NFS.Checked = False) Then
+        Window.Alert "Selecione Uma opção"
+    Else
+        window.Alert("Finish")
+    End if
+
+End Sub
+
+Sub Conserta_Importador()
+    oShell.run "cmd.exe /C \\000.000.000.000\app.exe"
+End Sub
+
+Sub Inventario()
+    oShell.run "Mshta.exe "+DIR_Agente+"\installAgente.hta"
+End Sub
+
+Sub setDns()
+    oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\Ferramentas\configureDns.bat"
+End Sub
+
+Sub domainEntry()
+    dim password
+    dim pcName
+    password=InputBox("Digite a senha do usuário atual :", "TI Tools")
+    oShell.run "powershell.exe net user administrador "+password+" /active:yes"
+    pcName=InputBox("Digite o novo nome do computador :", "TI Tools")
+    oShell.run "powershell.exe -noexit Add-Computer –DomainName umuprev.com.br -NewName "+pcName+" –Restart"
+End Sub
+
+Sub showLogs()
+    oShell.run "cmd /c explorer "+DIR_Agente+"\Inventario_Logs""  ",0,true
+End Sub
+
+Sub showInv()
+    oShell.run "cmd.exe /C "+DIR_TITools+"\Modules\Ferramentas\InventarioAdm.bat"
+End Sub
+
+</script>
+
+<body class="grid">
+    <h1>TI.Tools</h1>
+    <div style="display: flex; justify-content: center; align-items:center; margin: auto;">
+        <div class="container">
+            <center>
+                <h2>Programas</h2>
+            </center>
+
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="anyDesk" style="cursor: pointer;" id="anyDesk"> AnyDesk
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="googleChrome" style="cursor: pointer;" id="googleChrome"> Google Chrome
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="firefox" style="cursor: pointer;" id="firefox"> Firefox
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="libreOffice" style="cursor: pointer;" id="libreOffice"> LibreOffice
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="microsoftOffice" style="cursor: pointer;" id="microsoftOffice"> Microsoft Office
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="sevenZip" style="cursor: pointer;" id="sevenZip"> 7-Zip
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="big" style="cursor: pointer;" id="big"> Bigpharma
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="sigPaf" style="cursor: pointer;" id="sigPaf"> SigPaf
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="sigMed" style="cursor: pointer;" id="sigMed"> SigMed
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="sigPaf_RH" style="cursor: pointer;" id="sigPaf_RH"> MS1 RH
+            </label>
+            <label style="cursor: pointer;">
+                <input type="checkbox" name="msi_NFS" style="cursor: pointer;" id="msi_NFS"> MS1 NFS
+            </label>
+            <label style="cursor: pointer; width: min-content;">
+                <input type="checkbox" name="concent" id="concent" style="cursor: pointer;" id="concent"> Concent
+            </label>
+
+            <center>
+                <input type="button" name="btnStart" id="btnClick" value="Instalar" onclick="Start_Button" style="width: 150px; height: 37.5px; margin: 16px 0; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;box-shadow: 0 0 3px; behavior: url(PIE.htc);">
+            </center>
+        </div>
+
+        <div class="container" style="margin-left: 20px">
+            <center>
+                <h2>Ferramentas</h2>
+            </center>
+
+            <input type="button" name="consertaImportador" id="btnClick" value="Conserta importador - Big" onclick="Conserta_Importador" style="margin-bottom: 8px; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; width: 100%; min-height: 40px; cursor: pointer;behavior: url(PIE.htc);">
+            <input type="button" name="inventario" id="btnClick" value="Inventário" onclick="Inventario" style="margin-bottom: 8px; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; width: 100%; min-height: 40px; cursor: pointer;behavior: url(PIE.htc);">
+            <input type="button" name="dns" id="btnClick" value="Configurar DNS" onclick="setDns" style="margin-bottom: 8px; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; width: 100%; min-height: 40px; cursor: pointer;behavior: url(PIE.htc);">
+            <input type="button" name="domain" id="btnClick" value="Entrar no domínio" onclick="domainEntry" style="margin-bottom: 8px; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; width: 100%; min-height: 40px; cursor: pointer;behavior: url(PIE.htc);">
+            <input type="button" name="showInv" id="btnClick" value="Instala inventário" onclick="showInv" style="margin-bottom: 8px; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; width: 100%; min-height: 40px; cursor: pointer; cursor: pointer;behavior: url(PIE.htc);"/>
+            <input type="button" name="showLogs" id="btnClick" value="Ver logs inventário" onclick="showLogs" style="margin-bottom: 8px; background-color: #f2f2f2; color: #212121; border: none; border-radius: 5px; font-weight: bold; width: 100%; min-height: 40px; cursor: pointer; cursor: pointer;behavior: url(PIE.htc);"/>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <center>
+            <div>
+                <p style="font-size: 14px;" >By Chat - GPT</p>
+            </div>
+        </center>
+    </div>
+</body>
+</html>

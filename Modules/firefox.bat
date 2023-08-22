@@ -1,0 +1,1 @@
+msiexec /i %1\Apps\Firefox_Setup.msi /qb!
